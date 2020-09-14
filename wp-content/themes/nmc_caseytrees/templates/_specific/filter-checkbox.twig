@@ -1,0 +1,4 @@
+<label for="{{ name }}" class="checkbox-label{% if data[name] == 'on' %} checked{% endif %}">
+	<input type="checkbox" class="submit-on-change" name="{{ name }}" id="{{ name }}"{% if data[name] == 'on' %} checked="checked"{% endif %}>
+	<span>{{ label }}</span>
+</label>

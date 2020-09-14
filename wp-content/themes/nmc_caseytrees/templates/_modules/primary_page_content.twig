@@ -1,0 +1,8 @@
+<section class="module primary-page-content{% include '_modules/module-options.twig' with { module: module } %}">
+	<div class="bound-layout narrow">
+		{% if module.section_title %}
+			<h2 class="module-title">{{ module.section_title }}</h2>
+		{% endif %}
+		{{ post.content }}
+	</div>
+</section>

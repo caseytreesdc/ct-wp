@@ -1,0 +1,22 @@
+<section class="module four-column-ctas{% include '_modules/module-options.twig' with { module: module } %}">
+	<div class="bound-layout">
+		{% if module.section_title %}<h2>{{ module.section_title }}</h2>{% endif %}
+		<div class="wrap{% if module.ctas|length == 4 %} four{% elseif module.ctas|length == 1 %} one{% endif %}">
+			{% for item in module.ctas %}
+			<article class="cta">
+				<a{% include '_components/link-attributes.twig' with { link: item.link } %}>
+					{% if item.image %}
+					<div class="cta-image">
+						<img src="{{ Image(item.image).src|resize(247, 146) }}" alt="{{ Image(item.image).alt }}">
+					</div>
+					{% endif %}
+					<div class="cta-content">
+						{% if item.title %}<h3>{{ item.title }}</h3>{% endif %}
+						{% if item.excerpt %}<p>{{ item.excerpt|striptags }}</p>{% endif %}
+					</div>
+				</a>
+			</article>
+			{% endfor %}
+		</div>
+	</div>
+</section>

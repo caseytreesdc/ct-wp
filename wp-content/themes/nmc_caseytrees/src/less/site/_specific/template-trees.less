@@ -1,0 +1,254 @@
+.show-hide-filter {
+	display: none;
+
+	@media (max-width: @tablet) {
+		display: block;
+		margin: 0 10px;
+		height: 50px;
+		line-height: 50px;
+		text-align: center;
+		background: darken(@tan, 5%);
+		.transition();
+		cursor: pointer;
+
+		&:hover {
+			background: darken(@tan, 10%);
+		}
+
+		span {
+			display: block;
+		}
+
+		.hide { display: none; }
+
+		.filter-open & {
+
+			.hide {
+				display: block;
+			}
+
+			.show { display: none; }
+		}
+	}
+}
+
+#trees-wrap {
+	.clearFix;
+	position: relative;
+
+	&.loading .trees-wrap {
+		.opacity(.2);
+	}
+}
+
+#tree-filter {
+	float: left;
+	padding: 30px 20px;
+	width: 320px;
+	background: @tan;
+
+	.filter-section {
+		margin-bottom: 25px;
+		padding-bottom: 25px;
+		border-bottom: 1px solid @rule;
+
+		&:last-child {
+			padding: 0;
+			border: none;
+		} 
+	}
+
+	.filter-title {
+		font-size: 18px;
+		.bold;
+		color: @body-color;
+	}
+
+	select {
+		margin-bottom: 15px;
+		width: 100%;
+	}
+
+	label {
+		display: block;
+		position: relative;
+
+		&.checkbox-label {
+			margin: 10px 0;
+			line-height: 20px;
+
+			span {
+				padding-left: 15px;
+			}
+
+			&:before {
+				content: '';
+				position: absolute;
+				left: 0;
+				top: 0;
+				width: 20px;
+				height: 20px;
+				background: @tan;
+				border: 1px solid #a4a4a4;
+				.border-radius(2px);
+			}
+
+			&.checked {
+
+				&:before {
+					background: @tan url(../assets/checkbox-check.svg) 50% 50% no-repeat;
+					background-size: 9px 10px;
+				}
+			}
+		}
+	}
+
+	.note p {
+		margin: 0 0 20px 8px;
+		font-size: 12px;
+		line-height: 1.5em;
+		font-style: italic;
+		text-indent: -8px;
+	}
+
+	@media (max-width: @tablet) {
+		float: none;
+		margin: 0 10px;
+		width: auto;
+		display: none;
+
+		.filter-open & {
+			display: block;
+		}
+	}
+}
+
+.go-to-tree {
+	margin-bottom: 30px;
+
+	label {
+		display: block;
+		.sans;
+		.black;
+		text-transform: uppercase;
+		font-size: 16px;
+	}
+}
+
+#trees {
+	margin-left: 30px;
+	float: left;
+	width: calc(~'100% - 380px');
+
+	.trees-intro {
+		margin: 0 0 30px;
+		padding: 30px;
+		font-size: 16px;
+		background: fadeout(@green, 90%);
+
+		.the_content {
+			margin: 0 auto;
+			max-width: 800px;
+		}
+	}
+
+	.trees-wrap {
+		.transition();
+	}
+
+	@media (max-width: @tablet) {
+		margin: 50px 10px 0;
+		width: calc(~'100% - 20px');
+		text-align: center;
+	}
+}
+
+.tree-partial {
+	.grid-item(6,30px);
+
+	@media (max-width: 2000px) { .grid-item(5, 30px); }
+
+	@media (max-width: 1600px) { .grid-item(4, 30px); }
+
+	@media (max-width: 1300px) { .grid-item(3, 30px); }
+
+	@media (max-width: @mobile) { .grid-item(2, 30px); }
+
+	@media (max-width: @small) { .grid-item(1, 20px); }
+
+	.transition();
+
+	a {
+		display: block;
+
+		&:hover {
+
+			.tree-image {
+
+				img {
+					.scale(1.1);
+				}
+			}
+
+			.tree-content {
+
+				h3 {
+					color: @green;
+				}
+			}
+		}
+	}
+
+	.tree-image {
+		margin: 0 0 15px;
+		overflow: hidden;
+
+		img {
+			display: block;
+			width: 100%;
+			height: auto;
+			.transition();
+		}
+	}
+
+	.tree-content {
+		text-align: center;
+
+		h3 {
+			margin: 0 0 5px;
+			color: @header-color;
+			font-size: 24px;
+			line-height: 1em;
+			.transition();
+		}
+
+		p {
+			margin: 0 0 10px;
+			color: #787878;
+			font-size: 16px;
+			line-height: 1em;
+		}
+
+		ul {
+			.noList;
+		}
+
+		li {
+			display: inline-block;
+
+			svg {
+				display: block;
+			}
+
+			&.rebate svg {
+				width: 18px;
+				height: 18px;
+			}
+
+			&.riversmarthomes svg {
+				width: 18px;
+				height: 17px;
+			}
+		}
+	}
+}

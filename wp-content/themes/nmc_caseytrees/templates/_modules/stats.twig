@@ -1,0 +1,16 @@
+{% set random = random() %}
+<section class="module stats{% include '_modules/module-options.twig' with { module: module } %}" style="background-image: url({{ Image(module.background_image).src|resize(1440) }});">
+	{% if module.section_title %}<h2>{{ module.section_title }}</h2>{% endif %}
+	<div class="bound-layout">
+		{% for stat in module.stats %}
+		<div class="stat">
+			<div class="stat-value">
+				{% if stat.before_value %}<span class="before">{{ stat.before_value }}</span>{% endif %}
+				{% if stat.value %}<span class="value" id="stat-{{ loop.index }}-{{ random }}">{{ stat.value }}</span>{% endif %}
+				{% if stat.after_value %}<span class="after">{{ stat.after_value }}</span>{% endif %}
+			</div>
+			<h4 class="stat-description">{{ stat.description }}</h4>
+		</div>
+		{% endfor %}
+	</div>
+</section>

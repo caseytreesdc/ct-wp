@@ -1,0 +1,25 @@
+{% if primary_nav %}
+<ul>
+{% for item in primary_nav.get_items %}
+	<li class="nav-item {{item.classes | join(' ')}}">
+		<a{% if item.get_link != '#' %} href="{{item.get_link}}"{% endif %}{% if item.target %} target="{{ item.target }}"{% endif %}>{{item.title}}</a>
+
+
+		{# 2nd level - remove if not needed #}
+		{% if item.get_children %}
+			<span class="subnav-toggle"></span>
+			<ul>
+			{% for child in item.get_children %}
+				<li class="{{child.classes | join(' ')}}">
+					<a href="{{child.get_link}}"{% if child.target %} target="{{ child.target }}"{% endif %}>{{child.title}}</a>
+				</li>
+			{% endfor %}
+			</ul>
+		{% endif %}
+		{# end 2nd level #}
+
+
+	</li>
+{% endfor %}
+</ul>
+{% endif %}

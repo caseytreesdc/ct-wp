@@ -1,0 +1,44 @@
+{% set post_type = function('get_post_type', item.id) %}
+
+{% set image = 4623 %}
+
+{% if post_type == 'post' %}
+	{% set type = 'Blog Post' %}
+	{% if item.image %}
+		{% set image = item.image %}
+	{% endif %}
+{% elseif post_type == 'trees' %}
+	{% set type = 'Tree Species' %}
+	{% if item.primary_image %}
+		{% set image = item.primary_image %}
+	{% endif %}
+{% elseif post_type == 'resources' %}
+	{% set type = item.terms[0].title %}
+	{% if item.related_image %}
+		{% set image = item.related_image %}
+	{% endif %}
+{% elseif post_type == 'page' %}
+	{% set type = 'Page' %}
+	{% if item.related_image %}
+		{% set image = item.related_image %}
+	{% endif %}
+{% endif %}
+
+<article class="partial-resource">
+	<a href="{{ item.link }}">
+		<div class="resource-image">
+			<img src="{{ Image(image).src|resize(308, 181) }}" alt="{{ Image(image).alt }}">
+			{% if type %}<div class="type">{{ type }}</div>{% endif %}
+		</div>
+	    <div class="resource-content">
+	        <h2>{{ item.title }}</h2>
+	        <p>
+			{% if item.get_field('resource_excerpt_for_search_results') %}
+				{{ item.get_field('resource_excerpt_for_search_results') }}
+			{% else %}
+		        {{ item.content|striptags|truncate(26) }}
+	        {% endif %}
+	        <span class="fake-link">Read More</span></p>
+        </div>
+    </a>
+</article>

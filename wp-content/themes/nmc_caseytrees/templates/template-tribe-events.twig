@@ -1,0 +1,11 @@
+{% extends "_layouts/layout-one-col.twig" %}
+
+{% block masthead %}
+    {% include '_components/masthead.twig' %}
+{% endblock masthead %}
+
+{% block content %}
+	{{ function('tribe_events_before_html') }}
+	{{ function('tribe_get_view') }}
+	{{ function('tribe_events_after_html') }}
+{% endblock content %}

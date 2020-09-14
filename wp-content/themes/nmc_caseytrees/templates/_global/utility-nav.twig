@@ -1,0 +1,9 @@
+{% if utility_nav %}
+<ul class="utility-nav">
+{% for item in utility_nav.get_items %}
+	<li class="nav-item {{item.classes | join(' ')}}">
+		<a href="{{item.get_link}}"{% if item.target %} target="{{ item.target }}"{% endif %}>{{item.title}} {% if item.title == 'Search' %} {% include '_svg/icon-magnifying-glass.svg' %}{% endif %}</a>
+	</li>
+{% endfor %}
+</ul>
+{% endif %}

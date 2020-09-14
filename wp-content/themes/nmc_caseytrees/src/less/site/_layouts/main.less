@@ -1,0 +1,45 @@
+#main {
+	position: relative;
+	z-index: @z_main;
+	padding: 60px 0;
+
+	&.layout-two-col {
+
+		.primary-content {
+			float: left;
+			width: calc(~'100% - 328px');
+		}
+
+		.sidebar {
+			float: right;
+			width: 278px;
+		}
+	}
+
+	@media (max-width: @tablet) {		
+
+		&.layout-two-col {
+
+			.primary-content {
+				width: calc(~'100% - 240px');
+			}
+
+			.sidebar {
+				width: 220px;
+			}
+		}
+	}
+
+	@media (max-width: @mobile) {		
+
+		&.layout-two-col {
+
+			.primary-content,
+			.sidebar {
+				float: none;
+				margin: 0 0 25px;
+				width: 100%;
+			}
+		}
+	}
+}

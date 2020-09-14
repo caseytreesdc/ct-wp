@@ -1,0 +1,71 @@
+/**
+ * Hybrid Grid Sytem
+ *
+ * Blend of the Semantic Grid System and Zurb Foundation with a little Twitter Bootstrap
+ */
+
+ /* Grid (base) */
+@grid-column-width: 7%;
+@grid-columns: 12;
+@grid-gutter-width: (100% - (@grid-column-width * @grid-columns)) / (@grid-columns - 1 );
+
+@mobile-break-width: 480px;
+
+
+#grid {
+    .cols(@cols,@width,@gutter){
+        width: ((@cols * @width) + ((@cols - 1) * @gutter));
+        margin-left: @gutter;
+    }
+}
+
+.grid {
+    width: 100%;
+    .row {
+        display: block;
+        width: 100%;
+        .clearFix;
+        margin-bottom: @grid-gutter-width;
+            
+        .center,.center:last-child {
+            float: none;
+            margin: 0 auto;
+        }
+    }
+    .row>* {
+        position: relative;
+        float: left;
+        min-height: 1px;
+        &:first-child {
+            margin-left: 0;
+        }
+    }
+
+    
+    .colX (@index) when (@index > 0) {
+        .col@{index} {
+            #grid > .cols(@index,@grid-column-width,@grid-gutter-width);
+        }
+        .colX(@index - 1);
+    }
+    .colX(@grid-columns);
+}
+
+.onlymobile, .onlyMobile { display: none !important; }
+@media all and (max-width: @mobile-break-width) {
+    .nomobile, .noMobile { display: none !important; }
+    .onlymobile, .onlyMobile { display: block !important; }
+     // Reset all columns to full width
+    .grid {
+        // Reset all columns to full width
+        .colX (@index) when (@index > 0) {
+            .col@{index} {
+                width: 100%;
+                margin: 0;
+            }
+            .colX(@index - 1);
+        }
+        .colX(@grid-columns);
+        .colX(0) {};
+    }
+}

@@ -1,0 +1,63 @@
+.partial-event {
+	position: relative;
+	
+	&.full-link a {
+		.clearFix;
+		display: block;
+		color: @body-color;
+
+		&:hover {
+			color: @green;
+
+			.date {
+				background: @orangeHover;
+			}
+
+			.event-content {
+				
+				h3 {
+					color: @green;
+				}
+			}
+		}
+	}
+
+	.date {
+		float: left;
+		padding-top: 22px;
+		width: 90px;
+		height: 90px;
+		text-align: center;
+		color: #fff;
+		.sans;
+		background: @orange;
+		.border-radius(35px 2px);
+		.transition();
+
+		span {
+			display: block;
+		}
+
+		.month {
+			text-transform: uppercase;
+			font-size: 12px;
+		}
+
+		.day {
+			.black;
+			font-size: 32px;
+		}
+	}
+
+	.event-content {
+		margin-left: 115px;
+		font-size: 16px;
+
+		h3 {
+			margin: 0 0 5px;
+			font-size: 20px;
+			color: @body-color;
+			.transition();
+		}
+	}
+}

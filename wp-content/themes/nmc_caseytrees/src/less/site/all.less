@@ -1,0 +1,108 @@
+@sans: 'Lato', sans-serif; // 400, 800, 900
+@serif-alt: 'Droid Serif', serif;
+@serif: @sans;
+.sans { font-family:  @sans; }
+.serif { font-family: @serif; }
+.serif-alt { font-family: @serif-alt; }
+
+.regular {
+	font-weight: 400;
+}
+
+.bold {
+	font-weight: 800;
+}
+
+.black {
+	font-weight: 900;
+}
+
+// Variables
+
+@blue: #88cade;
+	@blueHover: lighten(@blue, 5%);
+@green: #006224;
+	@greenHover: lighten(@green, 5%);
+@orange: #de791b;
+	@orangeHover: lighten(@orange, 5%);
+@gold: #eecc35;
+	@goldHover: lighten(@gold, 5%);
+@gray: #787878;
+	@grayHover: lighten(@gray, 5%);
+@tan: #f2efe5;
+	@tanHover: lighten(@tan, 5%);
+@orange-light: #f88e2c;	
+
+@body-color: #555;
+@header-color: #2b2b2b;;
+@accent: @orange;
+	@accentHover: @orangeHover;
+@rule: #dbdbdb;
+@placeholder-color: #787878;
+
+@z_header: 3;
+@z_masthead: 1;
+@z_main: 1;
+@z_footer: 1;
+
+@desktop: 1400px;
+@tablet: 1095px;
+@mobile: 768px;
+@small: 500px;
+
+@import '_fonts/fonts';
+@import '_global/typography';
+@import '_global/grid-item';
+
+// Layouts
+@import '_layouts/bounds';
+@import '_layouts/main';
+@import '_layouts/sidebar';
+
+// Global
+@import '_global/header';
+@import '_global/footer';
+@import '_global/wp';
+@import '_global/animate';
+@import '_global/event-overwrites';
+
+// Components
+@import '_components/masthead';
+@import '_components/image';
+@import '_components/video';
+@import '_components/social-links';
+@import '_components/get-updates';
+@import '_components/subnav';
+@import '_components/pagination';
+@import '_components/fa-form';
+@import '_components/popup';
+
+// Modules
+@import '_modules/module';
+@import '_modules/full-width-cta';
+@import '_modules/three-column-articles';
+@import '_modules/four-column-ctas';
+@import '_modules/two-column-ctas';
+@import '_modules/content_with_image_link';
+@import '_modules/latest_events';
+@import '_modules/stats';
+@import '_modules/home_page_intro';
+@import '_modules/initiatives';
+
+// Specific
+@import '_specific/template-trees';
+@import '_specific/single-trees';
+@import '_specific/partial-post';
+@import '_specific/partial-post-small';
+@import '_specific/template-blog-page';
+@import '_specific/single-post';
+@import '_specific/partial-resource';
+@import '_specific/template-resources';
+@import '_specific/template-home';
+@import '_specific/partial-event';
+@import '_specific/tribe-events-overrides';
+@import '_specific/search-results';
+@import '_specific/template-static';
+@import '_specific/convio';
+
+@import 'provided-by-client';

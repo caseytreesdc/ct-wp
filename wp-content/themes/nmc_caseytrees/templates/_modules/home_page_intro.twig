@@ -1,0 +1,8 @@
+<section class="module home_page_intro{% include '_modules/module-options.twig' with { module: module } %}">
+	<div class="bound-layout">
+		<div class="intro">
+			{% if module.title %}<h2>{{ module.title }}</h2>{% endif %}
+			{{ module.description }}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,11 @@
+<section class="module content_with_image_link {{ module.image_alignment }}{% include '_modules/module-options.twig' with { module: module } %}">
+	<div class="bound-layout narrow">
+		<div class="module-image">
+			<img src="{{ Image(module.image).src }}" alt="{{ Image(module.image).alt }}">
+			<a{% include '_components/link-attributes.twig' with { link: module.image_link, class: 'btn ' ~ module.button_color } %}>{{ module.button_label }}</a>
+		</div>
+		<div class="the_content">
+			{{ module.content }}
+		</div>
+	</div>
+</section>

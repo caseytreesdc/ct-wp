@@ -1,0 +1,37 @@
+{#
+
+    HEY!!!!!
+    If you look at lines 17 and 27 you'll see that this is disabled pending CMS specific code.
+
+    pass this:
+    1. image - url of the image
+    2. aspect - aspect ratio of the image container
+    3. ratio - estimated ratio of the viewport width the image will occupy at desktop resolutions
+#}
+{% set ph = 'images/masthead.jpg' %}
+{% if not image %}{% set image = ph %}{% endif %}
+{% set defaultWidth = (1440 * ratio)|round %}
+{% set defaultHeight = (defaultWidth / aspect)|round %}
+<div class="image" style="padding-bottom: {{ 100 / aspect }}%;">
+    <img 
+        {#src="{{ image|imagesize({width: defaultWidth, height: defaultHeight, crop: true }) }}"#}
+        src="{{ image|resize(defaultWidth, defaultHeight) }}"
+        srcset="
+           {# we will start at 2x the predicted max for retina #}
+           {% set max = defaultWidth * 2 <= 1920 ? defaultWidth * 2 : 1920 %}
+           {% set steps = 5 %}
+           {% set pxPerStep = (max/steps)|round %}
+           {% for i in 1..steps %}
+               {% set w = pxPerStep * i %}
+               {% set h = (w / aspect)|round %}
+               {{ image|resize(w, h) }} {{ w }}w{% if not loop.last %},{% endif %}
+           {% endfor %}
+        "
+        
+        sizes="
+            (min-width: 1920px) {{ (100 * ratio * 0.8)|round }}vw,
+            (min-width: 600px) and (max-width: 1919px) {{ (100 * ratio)|round }}vw,
+            (max-width: 599px) 100vw
+        "
+    alt="{{ alt }}">
+</div>

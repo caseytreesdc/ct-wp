@@ -1,0 +1,25 @@
+{% set atts = '' %}
+{% set url = '' %}
+{% set target = '' %}
+
+{% if link %}
+
+	{% if link.type == 'internal' %}
+		{% set url = ' href="' ~ link.internal_link ~ '"' %}
+	{% elseif link.type == 'external' %}
+		{% set url = ' href="' ~ link.external_link ~ '"' %}
+	{% endif %}
+
+	{% if link.new_tab %}
+		{% set target = ' target="_blank"' %}
+	{% endif %}
+
+{% endif %}
+
+{% set atts = url ~ target %}
+
+{% if class %}
+	{% set atts = atts ~ ' class ="' ~ class ~ '"' %}
+{% endif %}
+
+{{ atts }}

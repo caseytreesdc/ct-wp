@@ -1,0 +1,60 @@
+.pagination {
+	.clearFix;
+	margin-top: 30px;
+	padding-top: 30px;
+	.sans;
+	text-transform: uppercase;
+	.black;
+	font-size: 16px;
+	border-top: 1px solid @rule;
+
+	a {
+		color: #787878;
+
+		&:hover {
+			color: @green;
+
+			&.newer svg {
+				.translate(-3px, 0);
+			}
+
+			&.older svg {
+				.translate(3px, 0);
+			}
+		}
+	}
+
+	.newer {
+		float: left;
+
+		svg {
+			margin-right: 5px;
+		}
+	}
+
+	.older {
+		float: right;
+
+		svg {
+			margin-left: 5px;
+		}
+	}
+
+	svg {
+		width: 7px;
+		height: 11px;
+
+		path {
+			fill: #787878;
+		}
+	}
+
+	@media (max-width: @mobile) {
+		font-size: 13px;
+
+		svg {
+			width: 5px;
+			height: 9px;
+		}
+	}
+}

@@ -1,0 +1,48 @@
+<section class="module latest_events{% include '_modules/module-options.twig' with { module: module } %}">
+	<div class="bound-layout">
+
+		{% if module.section_title %}<h2 class="section-title">{{ module.section_title }}</h2>{% endif %}
+
+		{% set cats = module.event_categories %}
+		{% set count = module.count %}
+		{% set events = function('get_latest_events', cats, count) %}
+
+		<div class="events-grid">
+			{% for event in events %}
+			{% set event = TimberPost(event) %}
+			<article class="partial-event full-link">
+				<a href="{{ event.link }}">
+					<div class="date">
+						<span class="month">{{ event._EventStartDate|date('M') }}</span>
+						<span class="day">{{ event._EventStartDate|date('j') }}</span>
+					</div>
+					<div class="event-content">
+						<h3>{{ event.title }}</h3>
+						<div class="event-meta">
+
+							<span class="times">
+								{% if event._EventAllDay == 'yes' %}
+									All Day
+								{% else %}
+									{{ event._EventStartDate|date('g:ia') }} - {{ event._EventEndDate|date('g:ia') }}
+								{% endif %}
+							</span>
+
+							{% if event._EventVenueID %}
+							<span class="venue">
+								{% set venue = TimberPost(event._EventVenueID) %}
+								| {{ venue.title }}
+							</span>
+							{% endif %}
+
+						</div>
+					</div>
+				</a>
+			</article>
+			{% else %}
+				<p>No upcoming events found.</p>
+			{% endfor %}
+		</div>
+
+	</div>
+</section>

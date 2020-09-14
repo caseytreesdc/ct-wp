@@ -1,0 +1,20 @@
+{% extends '_layouts/base.twig' %}
+
+{% block layout %}
+<section id="main">
+    {% block body %}
+    <div class="bound-layout{% block boundClass %}{% endblock boundClass %}">
+        {% block primary %}
+        <article class="primary-content">
+            {% block content %}
+                {{ post.content }}
+                {%- if post.get_field('code') %}
+                {{ post.get_field('code')|raw }}
+                {% endif -%}
+            {% endblock %}
+        </article>
+        {% endblock primary %}
+    </div>
+    {% endblock body %}
+</section>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "_layouts/layout-one-col.twig" %}
+
+{% block pageTitle %}{{ title }}{% endblock pageTitle %}
+
+{% block body %}
+<div class="tree">
+
+	<section class="module tree-section more-spacing no-top-spacing">
+		<div class="bound-layout narrow">
+			{#<h2>General Identification</h2>#}
+	
+			<div class="image-gallery">
+				<div class="swipe">
+					<div class="swipe-wrap">
+						{% for image in post.get_field('image_gallery') %}
+						{% set image = image.image %}
+						<article class="slide">
+							<img src="{{ Image(image).src|resize(770, 412) }}" alt="{{ Image(image).alt }}">
+						</article>
+						{% endfor %}
+					</div>
+				</div>
+				<a class="swipe-nav prev">{% include '_svg/swipe-arrow-left.svg' %}</a>
+				<a class="swipe-nav next">{% include '_svg/swipe-arrow-right.svg' %}</a>
+			</div>
+
+			<h3>Introduction</h3>
+			{{ post.content }}
+			
+			{#
+			<div class="attribute-grid narrow">
+				
+				<div class="attribute">
+					<h4>Scientific Name</h4>
+					<p>{{ post.get_field('scientific_name') }}</p>
+				</div>
+				
+				<div class="attribute">
+					<h4>Native?</h4>
+					{% set check = 'No' %}
+					{% if post.get_field('native') %}
+						{% set check = 'Yes' %}
+					{% endif %}
+					<p>{{ check }}</p>
+				</div>
+				
+				<div class="attribute">
+					<h4>Evergreen?</h4>
+					{% set check = 'No' %}
+					{% if post.get_field('evergreen') %}
+						{% set check = 'Yes' %}
+					{% endif %}
+					<p>{{ check }}</p>
+				</div>
+
+			</div>
+			#}
+
+		</div>
+	</section>
+	
+	{% if not post.get_field('hide_characteristics') %}
+	<hr class="bound">
+	<section class="module tree-section more-spacing">
+		<div class="bound-layout narrow">
+
+			<h2>Characteristics</h2>
+
+			<div class="characteristic-grid">
+				{% for item in post.get_field('characteristics') %}
+				<div class="characteristic {{ item.type.value }}">
+					<div class="characteristic-image">
+						{% include '_svg/icon-tree-' ~ item.type.value ~ '.svg' %}
+					</div>
+					<div class="characteristic-description">
+						<h4>{{ item.type.label }}</h4>
+						{{ item.description }}
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		
+		</div>
+	</section>
+	{% endif %}
+
+</div>
+{% endblock body %}

@@ -1,0 +1,20 @@
+{#### Need to be able to have b/w images ####}
+
+<section class="module two-column-ctas image-filled{% include '_modules/module-options.twig' with { module: module } %}">
+	{% for cta in module.ctas %}
+	<div class="cta">
+		<div class="image{% if cta.image_overlay %} green{% endif %}">
+			{% include '_components/image.twig' with {
+				image: Image(cta.image).src|resize(720, 400),
+				aspect: 720/400,
+				ratio: 1
+			} %}
+		</div>
+		<div class="cta-content">
+			{% if cta.title %}<h3>{{ cta.title }}</h3>{% endif %}
+			{% if cta.excerpt %}<p>{{ cta.excerpt|striptags }}</p>{% endif %}
+			<a{% include '_components/link-attributes.twig' with { link: cta.button_link, class: 'btn orange bigger' } %}>{{ cta.button_label }}</a>
+		</div>
+	</div>
+	{% endfor %}
+</section>

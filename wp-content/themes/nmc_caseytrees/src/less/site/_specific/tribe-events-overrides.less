@@ -1,0 +1,45 @@
+.partial-event.tribe-event-list {
+
+	.tribe-events-event-meta {
+		clear: none;
+	}
+
+	.event-content {
+		position: relative;
+		padding-right: 150px;
+	}
+
+	.event-button {
+		position: absolute;
+		right: 0;
+		top: 0;
+	}
+
+	@media (max-width: @mobile) {
+
+		.tribe-events-event-meta {
+			background: none;
+			border: none;
+			padding: 0;
+		}
+
+		.tribe-events-venue-details {
+			margin: 0;
+			padding: 0;
+			border: none;
+		}
+
+		.tribe-events-content {
+			float: none;
+		}
+
+		.event-content {
+			padding-right: 0;
+		}
+
+		.event-button {
+			position: static;
+			margin-top: 15px;
+		}
+	}
+}

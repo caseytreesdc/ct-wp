@@ -1,0 +1,9 @@
+.grid-item(@cols,@gap) {
+    float: left;
+    @widthBase: 99.9% / @cols; // ie help
+    @perGap: @gap * ((@cols - 1)/@cols);
+    width: calc(@widthBase ~" - " @perGap);
+    &:nth-child(n) { margin: 0 @gap @gap 0; clear: none; }
+    &:nth-child(@{cols}n) { margin-right: 0; }
+    &:nth-child(@{cols}n + 1) { clear: both; }
+}

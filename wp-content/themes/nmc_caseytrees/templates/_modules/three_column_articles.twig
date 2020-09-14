@@ -1,0 +1,56 @@
+{% if module.source == 'specific' %}
+	{% set specific = module.specific_posts %}
+	{% set articles = [] %}
+	{% for item in specific %}
+		{% set articles = articles|merge([TimberPost(item.post)]) %}
+	{% endfor %}
+{% elseif module.source == 'tag' %}
+	{% set tags = module.filter|join(',') %}
+	{% set articles = function('three_column_articles', tags) %}
+	{% if articles|length < 3 %}
+		{% set articles = function('three_column_articles', tags, 'IN') %}
+	{% endif %}
+	{% if articles|length < 3 %}
+		{% set articles = function('three_column_articles') %}
+	{% endif %}
+{% endif %}
+
+<section class="module three-column-articles{% include '_modules/module-options.twig' with { module: module } %}">
+	<div class="bound-layout">
+		{% if module.section_title %}<h2>{{ module.section_title }}</h2>{% endif %}
+		<div class="wrap">
+			{% for item in articles %}
+
+			{% set post_type = function('get_post_type', item.id) %}
+
+			{% if post_type == 'post' %}
+				{% set type = 'Blog Post' %}
+			{% elseif post_type == 'trees' %}
+				{% set type = 'Tree Species' %}
+			{% elseif post_type == 'resources' %}
+				{% set type = item.terms[0].title %}
+			{% elseif post_type == 'page' %}
+				{% set type = false %}
+			{% endif %}
+			
+			<article class="article">
+				<a href="{{ item.link }}">
+					<div class="article-image">
+						<img src="{{ Image(item.related_image).src|resize(340, 200) }}" alt="{{ Image(item.related_image).alt }}">
+						{% if type %}<div class="type">{{ type }}</div>{% endif %}
+					</div>
+					<div class="article-content">
+						<h3>{{ item.title }}</h3>
+						<p>{{ item.excerpt|striptags }} <span class="fake-link">READ MORE</span></p>
+					</div>
+				</a>
+			</article>
+			{% endfor %}
+		</div>
+		{% if module.section_button_link and module.section_button_label %}
+		<div class="section-button">
+			<a{% include '_components/link-attributes.twig' with { link: module.section_button_link, class: 'btn green' } %}>{{ module.section_button_label }}</a>
+		</div>
+		{% endif %}
+	</div>
+</section>

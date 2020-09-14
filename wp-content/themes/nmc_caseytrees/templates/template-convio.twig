@@ -1,0 +1,16 @@
+{% extends '_layouts/base.twig' %}
+
+{% block head %}
+	{% include '_components/convio-head.twig' %}
+{% endblock head %}
+
+{% block bodyclass %} convio-page{% endblock bodyclass %}
+
+{% block bodytag %}
+
+	{# include '_components/convio-session-3.twig' #}
+	<convio:session name="63" param="3"></convio:session>
+
+	{% include '_global/footer.twig' with { minimal: true, convio: true } %}
+
+{% endblock bodytag %}

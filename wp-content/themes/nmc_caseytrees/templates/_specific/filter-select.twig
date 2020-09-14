@@ -1,0 +1,6 @@
+<select name="{{ name }}" id="{{ name }}" class="submit-on-change">
+	<option value>{{ label }}</option>
+	{% for key, option in options %}
+	<option value="{{ key }}"{% if data[name] == key %} selected="selected"{% endif %}>{{ option }}</option>
+	{% endfor %}
+</select>

@@ -1,0 +1,15 @@
+{% extends "_layouts/full.twig" %}
+
+{% set thing = TimberPost(options.not_found_page) %}
+
+{% block masthead %}
+	{% include '_components/masthead.twig' with { post: thing } %}
+{% endblock masthead %}
+
+{% block content %}
+<div class="modules">
+	{% for module in thing.get_field('modules') %}
+		{% include '_modules/' ~ module.acf_fc_layout ~ '.twig' with { module: module } %}
+	{% endfor %}
+</div>
+{% endblock content %}

@@ -1,0 +1,66 @@
+{% extends "_layouts/layout-two-col.twig" %}
+
+{% block aboveBody %}
+	{% set parent = TimberPost(options.post_parent) %}
+	<div class="post-filter">
+		<div class="bound-layout">
+			<div class="filter-wrap">
+				<h4>Filter Posts:</h4>
+				<form action="{{ parent.link }}">
+					<fieldset class="search">
+						<input type="search" name="search" placeholder="Search by keyword"{% if get.search %} value="{{ get.search|e }}"{% endif %}>
+						<button type="submit">{% include '_svg/icon-magnifying-glass.svg' %}</button>
+					</fieldset>
+					<fieldset class="select first-select">
+						<select name="category" class="submit-on-change">
+							<option value="">Filter by Category</option>
+							{% for cat in function('get_categories') %}
+							<option value="{{ cat.slug }}"{% if get.category == cat.slug %} selected="selected"{% endif %}>{{ cat.name }}</option>
+							{% endfor %}
+						</select>
+					</fieldset>
+					<fieldset class="select">
+						<select name="date" class="submit-on-change">
+							<option value="">Filter by Date</option>
+							{% for date in function('custom_archive_list') %}
+							<option value="{{ date.value }}"{% if get.date == date.value %} selected="selected"{% endif %}>{{ date.label }}</option>
+							{% endfor %}
+						</select>
+					</fieldset>
+				</form>
+				<!-- <a href="{{ parent.link }}" class="clear">Clear Filter</a> -->
+			</div>
+		</div>
+	</div>
+{% endblock aboveBody %}
+
+{% block content %}
+
+    {{ post.content }}
+
+    {% for item in posts %}
+        {% include '_specific/partial-post.twig' with { item: item } %}
+    {% else %}
+    	<h3>No results found.</h3>
+    	<p>Please try your search again.</p>
+    {% endfor %}
+    {% include '_components/pagination.twig' with { pagination: pagination } %}
+
+{% endblock content %}
+
+{% block sidebarBlock %}
+<aside class="sidebar sticky-blog-sidebar">
+    {% block sidebar %}
+    <section class="post-list">
+		<h3>Most Read</h3>
+		<div class="list">
+			{% for item in function('most_read_posts') %}
+				{% include '_specific/partial-post-small.twig' with { item: item } %}
+			{% endfor %}
+		</div>
+	</section>
+	{% endblock sidebar %}
+</aside>
+{% endblock sidebarBlock %}
+
+

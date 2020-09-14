@@ -1,0 +1,265 @@
+.tree-section {
+
+	h2 {
+		margin: 0 0 1em;
+	}
+
+	.image-gallery {
+		position: relative;
+
+		.swipe {
+			overflow: hidden;
+			visibility: hidden;
+			position: relative;
+
+			.swipe-wrap {
+				overflow: hidden;
+				position: relative;
+			}
+
+			.slide {
+				float: left;
+				width: 100%;
+				position: relative;
+
+				img {
+					display: block;
+					width: 100%;
+					height: auto;
+				}
+			}
+		}
+
+		.swipe-nav {
+			display: block;
+			position: absolute;
+			top: calc(~'50% - 26px');
+			cursor: pointer;
+
+			@media (max-width: @tablet) { top: calc(~'50% - 16px'); }
+
+			&.prev {
+				left: -60px;
+
+				&:hover svg {
+					.translate(-5px, 0);
+				}
+
+				@media (max-width: @tablet) { left: 10px; }
+			}
+
+			&.next {
+				right: -60px;
+
+				&:hover svg {
+					.translate(5px, 0);
+				}
+
+				@media (max-width: @tablet) { right: 10px; }
+			}
+
+			svg {
+				display: block;
+				width: 33px;
+				height: 52px;
+				.transition();
+
+				@media (max-width: @tablet) {
+					width: 20px;
+					height: 32px;
+				}
+			}
+		}
+	}
+}
+
+.characteristic-grid {
+
+	.characteristic {
+		.clearFix;
+		margin-bottom: 40px;
+
+		.characteristic-image {
+			float: left;
+			position: relative;
+			width: 150px;
+			height: 150px;
+			.border-radius(50%);
+
+			svg {
+				position: absolute;
+				left: 50%;
+				top: 50%;
+				.translate(-50%, -50%);
+			}
+		}
+
+		&.size .characteristic-image {
+			background: @gold;
+
+			svg {
+				width: 82px;
+				height: 82px;
+			}
+		}
+
+		&.light .characteristic-image {
+			background: @blue;
+
+			svg {
+				width: 89px;
+				height: 89px;
+			}
+		}
+
+		&.care .characteristic-image {
+			background: @orange;
+
+			svg {
+				width: 80px;
+				height: 78px;
+			}
+
+		}
+
+		&.flower .characteristic-image {
+			background: @gold;
+
+			svg {
+				width: 88px;
+				height: 88px;
+			}
+		}
+
+		&.fruit-nut .characteristic-image {
+			background: @blue;
+
+			svg {
+				width: 68px;
+				height: 79px;
+			}
+		}
+
+		&.seasonal-color .characteristic-image {
+			background: @orange;
+
+			svg {
+				width: 80px;
+				height: 82px;
+			}
+		}
+
+		&.eligibility .characteristic-image {
+			background: @gold;
+
+			svg {
+				width: 82px;
+				height: 82px;
+			}
+		}
+
+		.characteristic-description {
+			margin-left: 175px;
+		}
+
+		h4 {
+			margin: 0;
+		}
+		
+		p {
+			margin-bottom: 25px;
+		}
+
+		@media (max-width: @mobile) {
+
+			.characteristic-image {
+				width: 100px;
+				height: 100px;
+			}
+
+			&.size .characteristic-image {
+
+				svg {
+					width: 60px;
+					height: 60px;
+				}
+			}
+
+			&.light .characteristic-image {
+
+				svg {
+					width: 65px;
+					height: 65px;
+				}
+			}
+
+			&.care .characteristic-image {
+
+				svg {
+					width: 60px;
+					height: 59px;
+				}
+
+			}
+
+			&.flower .characteristic-image {
+
+				svg {
+					width: 64px;
+					height: 64px;
+				}
+			}
+
+			&.fruit-nut .characteristic-image {
+
+				svg {
+					width: 50px;
+					height: 58px;
+				}
+			}
+
+			&.seasonal-color .characteristic-image {
+
+				svg {
+					width: 60px;
+					height: 62px;
+				}
+			}
+
+			&.eligibility .characteristic-image {
+
+				svg {
+					width: 55px;
+					height: 55px;
+				}
+			}
+
+			.characteristic-description {
+				margin-left: 115px;
+			}
+		}
+	}
+}
+
+.attribute-grid {
+
+	.attribute {
+		.grid-item(4, 20px);
+		@media (max-width: @tablet) { .grid-item(3, 20px); }
+		@media (max-width: @mobile) { .grid-item(2, 20px); }
+
+		text-align: center;
+
+		h4 {
+			margin: 0;
+		}
+		p {
+			margin-bottom: 25px;
+		}
+	}
+
+	&.narrow .attribute {
+		.grid-item(3, 20px);
+		@media (max-width: @mobile) { .grid-item(2, 20px); }
+	}
+}

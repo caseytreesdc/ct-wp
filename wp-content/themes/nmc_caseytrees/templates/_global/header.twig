@@ -1,0 +1,47 @@
+{% if show_tfa_forms is not defined %}{% set show_tfa_forms = true %}{% endif %}
+<header id="header"{% if post.hide_get_updates_tab %} class="shadow"{% endif %}>
+	<div class="utility-bar">
+		<div class="bound-layout full">
+			{% include '_components/social-links.twig' %}
+			{% include '_global/utility-nav.twig' %}
+		</div>
+	</div>
+	<div class="header-main">
+		<div class="bound-layout full">
+			<div class="logo">
+				<a href="/">{% include '_svg/logo.svg' %}</a>
+			</div>
+			{% if options.mobile_button %}
+			<div class="mobile-donate">
+				<a href="{{ options.mobile_button.url }}" class="btn smaller"{% if options.mobile_button.target %} target="{{ options.mobile_button.target }}"{% endif %}>{{ options.mobile_button.title }}</a>
+			</div>
+			{% endif %}
+			<div class="nav-toggle">
+				<span class="l1"></span>
+				<span class="l2"></span>
+				<span class="l3"></span>
+			</div>
+			<nav class="primary-nav">
+				{% include '_global/primary-nav.twig' %}
+				<div class="utility-bar">
+					{% include '_components/social-links.twig' %}
+					{% include '_global/utility-nav.twig' %}
+				</div>
+			</nav>
+		</div>
+	</div>
+	{# if post.id != '15' and not post.hide_get_updates_tab #} {# hide on home page #}
+	<div class="header-signup">
+		<div class="bound-layout full">
+			<div class="signup-wrap">
+				{% if show_tfa_forms %}
+				<div class="signup-form">
+					{% include '_components/get-updates.twig' with { name: 'get_updates_header' } %}
+				</div>
+				<div class="trigger">Get Updates {% include '_svg/icon-envelope.svg' %}<div>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+	{# endif #}
+</header>

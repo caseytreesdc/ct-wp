@@ -1,0 +1,8 @@
+{% extends "template-blog-page.twig" %}
+
+{% block content %}
+	{% for post in posts %}
+        {% include '_specific/partial-post.twig' with { item: post } %}
+    {% endfor %}
+    {% include '_components/pagination.twig' with { pagination: pagination } %}
+{% endblock content %}

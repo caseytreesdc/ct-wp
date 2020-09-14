@@ -1,0 +1,14 @@
+{
+    "name": "nmcteam/social-base",
+    "authors": [
+        {
+            "name": "New Media Campaigns",
+            "email": "info@newmediacampaigns.com"
+        }
+    ],
+   "autoload": {
+        "psr-4": {
+            "NMC_Social\\": "src/"
+        }
+    }
+}

@@ -1,0 +1,58 @@
+{# Determine if Google Analytics should be enabled on this request. By default, it is 
+always enabled, but an option can turn it off for admins and editors #}
+{%- set gaDisplayStatus -%}
+	{%- if not options.disable_tracking_for_logged_in -%}
+		enabled
+	{%- else -%}
+		{%- if fn('get_current_user_id') > 0 and (fn('current_user_can', 'editor') or fn('current_user_can', 'administrator')) -%}
+			disabled
+		{%- else -%}
+			enabled
+		{%- endif -%}
+	{%- endif -%}
+{%- endset -%}
+
+{% if location == 'head' %}
+
+	{% if options.google_verification_tag_code %}
+	<meta name="google-site-verification" content="{{ options.google_verification_tag_code }}" />
+	{% endif %}
+
+	{% if gaDisplayStatus == 'enabled' %}
+		{% if options.analytics == 'ga' and options.google_analytics_ID %}
+			<!-- Global site tag (gtag.js) - Google Analytics -->
+			<script async src="https://www.googletagmanager.com/gtag/js?id={{ options.google_analytics_ID }}"></script>
+			<script>
+				window.dataLayer = window.dataLayer || [];
+				function gtag(){dataLayer.push(arguments);}
+				gtag('js', new Date());
+				gtag('config', '{{ options.google_analytics_ID }}');
+				{% do action('nmc_gtag_custom') %}
+			</script>
+		{% elseif options.analytics == 'gtm' and options.google_tag_manager_ID %}
+			<!-- Google Tag Manager -->
+			<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+			})(window,document,'script','dataLayer', '{{ options.google_tag_manager_ID }}');</script>
+			<!-- End Google Tag Manager -->
+		{% endif %}
+	{% else %}
+		<!-- Google Analytics/Tag Manager has been disabled for your user level -->
+	{% endif %}
+
+{% else %}
+
+	{% if gaDisplayStatus == 'enabled' and options.analytics == 'gtm' and options.google_tag_manager_ID %}
+        <!-- Google Tag Manager (noscript) -->
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id={{ options.google_tag_manager_ID }}"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+        <!-- End Google Tag Manager (noscript) -->
+    {% else %}
+    	{% if gaDisplayStatus == 'disabled' %}
+			<!-- Google Analytics/Tag Manager has been disabled for your user level -->
+		{% endif %}
+    {% endif %}
+
+{% endif %}

@@ -1,0 +1,10 @@
+{% set subnav = function('nmc_get_subnav', post.id) %}
+{% if subnav %}
+<div class="subnav">
+	{% for item in subnav.menu.get_items %}
+		<li class="nav-item {{item.classes | join(' ')}}">
+			<a href="{{item.get_link}}"{% if item.target %} target="{{ item.target }}"{% endif %}>{{item.title}} {% if item.title == 'Search' %} {% include '_svg/icon-magnifying-glass.svg' %}{% endif %}</a>
+		</li>
+	{% endfor %}
+</div>
+{% endif %}

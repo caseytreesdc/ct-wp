@@ -1,0 +1,50 @@
+<div class="popup {% if not post.get_field('override_global_popup') %}global-popup{% else %}post-popup{% endif %}" id="popup-global-page">
+    <div class="info">
+        <a class="close"><svg viewbox="0 0 40 40"><path d="M 10,10 L 30,30 M 30,10 L 10,30"/></svg></a>
+        
+
+			{% if not post.get_field('override_global_popup') %}
+				<div class="text">
+				<h2>{{options.popup_heading}}</h2>
+				{{options.popup_text|raw}}
+				<a{% include '_components/link-attributes.twig' with { link: options.popup_button_link, class: 'btn green' } %}>{{ options.popup_button_text }}</a>
+				</div>
+				<div class="media">
+					{% if options.popup_type == 'image' %}
+						<img src="{{ Image(options.popup_image).src|resize(617, 347) }}" alt="{{ options.popup_heading }}">
+					{% else %}
+						<div class="video">
+							<iframe src="https://www.youtube.com/embed/{{ options.popup_youtube_video_id }}" frameborder="0" allowFullScreen></iframe>
+						</div>
+					{% endif %}		
+				</div>
+			{% else %}
+				<div class="text">
+					<h2>{{post.get_field('popup_heading')}}</h2>
+					{{post.get_field('popup_text')|raw}}
+					
+				    {% if post.get_field('popup_button_link_type') == 'internal' %}
+						{% set url = ' href="' ~ post.get_field('popup_button_link_internal_link') ~ '"' %}
+					{% elseif post.get_field('popup_button_link_type') == 'external' %}
+						{% set url = ' href="' ~ post.get_field('popup_button_link_external_link') ~ '"' %}
+					{% endif %}
+
+					{% if post.get_field('popup_button_link_new_tab') %}
+						{% set target = ' target="_blank"' %}
+					{% endif %}
+
+					<a {{url}} class= "btn green" {{target}}>{{ post.get_field('popup_button_text') }}</a>
+				</div>
+				<div class="media">
+					{% if post.get_field('popup_type') == 'image' %}
+						<img src="{{ Image(post.get_field('popup_image')).src|resize(617, 347) }}" alt="{{ post.get_field('popup_heading') }}">
+					{% else %}
+						<div class="video">
+							<iframe src="https://www.youtube.com/embed/{{ post.get_field('popup_youtube_video_id') }}" frameborder="0" allowFullScreen></iframe>
+						</div>
+					{% endif %}		
+				</div>
+			{% endif %}
+        
+    </div>
+</div>

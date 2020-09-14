@@ -1,0 +1,128 @@
+// Form Styles - #get-updates section styles below
+.get-updates {
+	position: relative;
+	z-index: 2;
+	text-align: center;
+
+	> * {
+		display: inline-block;
+		vertical-align: middle;
+		margin: 0 8px;
+		width: auto;
+	}
+
+	h3 {
+		font-size: 24px;
+		line-height: 50px;
+		color: #fff;
+		.black
+	}
+
+	.field {
+		position: relative;
+		width: 210px;
+		font-size: 16px;
+
+		&.has-error .error {
+			.opacity(1);
+			visibility: visible;
+		}
+
+		.error {
+			.opacity(0);
+			visibility: hidden;
+			.transition();
+			position: absolute;
+			left: 0;
+			top: calc(~'100% + 10px');
+			padding: 10px;
+			width: 100%;
+			line-height: 1.2em;
+			font-size: 12px;
+			color: #fff;
+			.sans;
+			.black;
+			text-align: left;
+			background: fadeout(red, 20%);
+			.border-radius(5px);
+
+			&:before {
+				content: '';
+				position: absolute;
+				left: 20px;
+				top: -10px;
+				width: 0;
+				height: 0;
+				border-bottom: 10px solid fadeout(red, 20%);
+				border-left: 10px solid transparent;
+				border-right: 10px solid transparent;
+			}
+
+			@media (max-width: @mobile) {
+				top: 0;
+				height: 100%;
+
+				&:before {
+					display: none;
+				}
+			}
+		}
+	}
+
+	@media (max-width: @desktop) {
+
+		.field {
+			width: 180px;
+		}
+	}
+
+	@media (max-width: @tablet) {
+
+		h3 {
+			display: block;
+			margin: 0 0 10px;
+		}
+
+		.field {
+			width: 150px;
+		}
+	}
+
+	@media (max-width: @mobile) {
+		margin: 0 auto;
+		max-width: 360px;
+
+		h3 {
+			font-size: 20px;
+		}
+
+		.field {
+			display: block;
+			margin: 0 0 15px;
+			width: 100%;
+		}
+
+		input[type="submit"] {
+			display: block;
+			margin: 0;
+			width: 100%;
+		}
+	}
+}
+
+// Section Styles
+#get-updates {
+	padding: 47px 0;
+	background: @tan;
+
+	.get-updates {
+
+		h3 {
+			color: @body-color;
+		}
+	}
+
+	@media (max-width: @mobile) {
+		padding: 20px 0 40px;
+	}
+}

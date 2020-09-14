@@ -1,0 +1,23 @@
+{% extends '_layouts/base.twig' %}
+
+{% block layout %}
+<section id="main" class="layout-two-col">
+    {% block body %}
+    {% block aboveBody %}{% endblock aboveBody %}
+    <div class="bound-layout">
+        {% block primary %}
+        <article class="primary-content">
+            {% block content %}
+                {{ post.content }}
+            {% endblock %}
+        </article>
+        {% endblock primary %}
+        {% block sidebarBlock %}
+        <aside class="sidebar">
+            {% block sidebar %}{% endblock sidebar %}
+        </aside>
+        {% endblock sidebarBlock %}
+    </div>
+    {% endblock body %}
+</section>
+{% endblock %}

@@ -1,0 +1,64 @@
+/*
+ * Styles for Wordpress specific things.
+ * Can be added within less structure where appropriate.
+ */
+
+.the_content {
+
+    .alignright {
+        float: right;
+        margin: 0 0 1.5em 2em;
+        max-width: 50%;
+    }
+
+    .alignleft {
+        float: left;
+        margin: 0 2em 1.5em 0;
+        max-width: 50%;
+    }
+
+    .aligncenter {
+        clear: both;
+        margin: 2.5em auto;
+    }
+
+    img {
+        display: block;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .wp-caption {
+
+        img {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .wp-caption-text {
+            margin: 0;
+            font-size: 13px;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+
+    .the_content {
+
+        .alignright,
+        .alignleft,
+        .aligncenter {
+            float: none;
+            margin: 2.5em auto;
+            max-width: 100%;
+        }
+
+        .wp-caption {
+
+            .wp-caption-text {
+                font-size: 12px;
+            }
+        }
+    }
+}

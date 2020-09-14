@@ -1,0 +1,62 @@
+.social-links {
+
+	@color: #dbdbdb;
+	@hover: darken(@color, 10%);
+
+	a {
+		display: inline-block;
+		margin: 0 5px;
+
+		svg {
+			fill: @color;
+			.transition();
+		}
+
+		&:hover svg{
+			fill: @hover;
+		}
+	}
+
+	.facebook svg {
+		width: 10px;
+		height: 20px;
+	}
+
+	.twitter svg {
+		width: 21px;
+		height: 17px;
+	}
+
+	.instagram svg {
+		width: 18px;
+		height: 17px;
+	}
+
+	.youtube svg {
+		width: 26px;
+		height: 17px;
+	}
+
+	&.bigger {
+
+		.facebook svg {
+			width: 16px;
+			height: 35px;
+		}
+
+		.twitter svg {
+			width: 35px;
+			height: 29px;
+		}
+
+		.instagram svg {
+			width: 30px;
+			height: 29px;
+		}
+
+		.youtube svg {
+			width: 43px;
+			height: 28px;
+		}
+	}
+}

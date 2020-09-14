@@ -1,0 +1,8 @@
+{% set class = '' %}
+{% if module.module_options.spacing != 'none' %}
+	{% set class = class ~ ' ' ~ module.module_options.spacing %}
+{% endif %}
+{% if module.module_options.modify_spacing != 'none' %}
+	{% set class = class ~ ' ' ~ module.module_options.modify_spacing %}
+{% endif %}
+{{ class }}

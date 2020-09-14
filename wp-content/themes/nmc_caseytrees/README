@@ -1,0 +1,8 @@
+Terminal commands
+
+1. npm install
+2. gulp
+
+If "gulp" works without error, try "gulp watch" for automatic compiling on save.
+
+To stop gulp watch, CMD + C

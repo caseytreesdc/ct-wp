@@ -1,0 +1,48 @@
+{% extends "_layouts/base.twig" %}
+
+{% block masthead %}
+
+	{% set masthead = post.get_field('masthead')[0] %}
+
+	<section id="masthead" class="home-masthead">
+		{% if masthead.video %}
+			<div class="video-container">
+				<video loop muted autoplay playsinline class="fullscreen-bg__video">
+			        <source src="{{ masthead.video }}" type="video/mp4">
+			    </video>
+			</div>
+			{% if masthead.gradient == 'true' %}<div class="overlay"></div>{% endif %}
+		{% else %}
+			{% include '_components/image.twig' with {
+				image: Image(masthead.image).src,
+				aspect: 1440/648,
+				ratio: 1,
+				alt: Image(masthead.image).alt
+			} %}
+		{% endif %}
+		<div class="bound-layout full">
+			<div class="masthead-content">
+				{% if masthead.title %}<h1>{{ masthead.title }}</h1>{% endif %}
+				{% if masthead.excerpt %}<p>{{ masthead.excerpt }}</p>{% endif %}
+				<a{% include '_components/link-attributes.twig' with { link: masthead.button_link, class: 'btn blue' } %}>{{ masthead.button_label }}</a>
+			</div>
+		</div>
+	</section>
+
+	{#
+	<section class="masthead-signup">
+		{% include '_components/get-updates.twig' with { name: 'get_updates_header' } %}
+	</section>
+	#}
+
+{% endblock masthead %}
+
+{% block layout %}
+	
+	<div class="modules">
+		{% for module in post.get_field('modules') %}
+			{% include '_modules/' ~ module.acf_fc_layout ~ '.twig' with { module: module } %}
+		{% endfor %}
+	</div>
+	
+{% endblock layout %}

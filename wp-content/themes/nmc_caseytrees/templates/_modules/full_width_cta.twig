@@ -1,0 +1,22 @@
+{% set tall = module.tall %}
+{% set height = 430 %}
+{% if tall %}
+	{% set height = 594 %}
+{% endif %}
+{% set overlay = module.overlay %}
+{% set fillIn = module.fill_in_content %}
+{% set right = module.right_align_content %}
+<section class="module full-width-cta image-filled{% if overlay %} overlay{% endif %}{% if tall %} tall{% endif %}{% include '_modules/module-options.twig' with { module: module } %}">
+	{% include '_components/image.twig' with {
+		image: Image(module.image).src,
+		aspect: 1440/height,
+		ratio: 1
+	} %}
+	<div class="bound-layout">
+		<div class="cta-content{% if fillIn %} fill-in{% endif %}{% if right %} right{% endif %}">
+			{% if module.title %}<h3>{{ module.title }}</h3>{% endif %}
+			{% if module.excerpt %}<p>{{ module.excerpt|striptags }}</p>{% endif %}
+			<a{% include '_components/link-attributes.twig' with { link: module.button_link, class: 'btn green bigger' } %}>{{ module.button_label }}</a>
+		</div>
+	</div>
+</section>

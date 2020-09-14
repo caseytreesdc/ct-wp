@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+{% for item in function('get_posts', {posts_per_page: -1,orderby:'date',has_password:0,post_type:'any'}) %}
+{% if item.post_name == 'sitemap' %}{% else %}
+<url>
+	<loc>{{ function('get_permalink', item.ID) }}</loc>
+</url>
+{% endif %}
+{% endfor %}
+</urlset>

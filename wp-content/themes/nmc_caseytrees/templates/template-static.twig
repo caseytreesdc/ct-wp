@@ -1,0 +1,55 @@
+{% extends '_layouts/base.twig' %}
+
+{% block bodytag %}
+
+<header>
+	<div class="bound-layout">
+		<div class="logo">
+			{% include '_svg/logo.svg' %}
+		</div>
+	</div>
+</header>
+
+<section class="amount">
+	<div class="bound-layout">
+		<h2 class="light">Header for Amount Section</h2>
+		<div class="columns">
+			<div class="column">
+				<h3>Content Area</h3>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dolorum a vero ex porro libero dicta aliquid, cupiditate. Repellendus ducimus impedit incidunt excepturi temporibus, dolores consequatur? Maiores porro quaerat voluptates earum!</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="billing-info">
+	<div class="bound-layout">
+		<h2>Header for Billing Info Section</h2>
+		<div class="columns">
+			<div class="column">
+				Column
+			</div>
+			<div class="column">
+				Column
+			</div>
+		</div>
+	</div>
+</section>
+
+<section class="payment">
+	<div class="bound-layout">
+		<h2 class="light">Header for Payment Section</h2>
+		<div class="columns">
+			<div class="column">
+				Column
+			</div>
+			<div class="column">
+				Column
+			</div>
+		</div>
+	</div>
+</section>
+
+{% include '_global/footer.twig' with { minimal: true } %}
+
+{% endblock bodytag %}

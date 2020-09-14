@@ -1,0 +1,63 @@
+{% if show_tfa_forms is not defined %}{% set show_tfa_forms = true %}{% endif %}
+{% if not minimal %}
+	{% if show_tfa_forms and post.get_field('hide_get_updates') != 1 %}
+	<section id="get-updates">
+		<div class="bound-layout">
+			{% include '_components/get-updates.twig' with { name: 'get_updates_footer' } %}
+		</div>
+	</section>
+	{% endif %}
+{% endif %}
+<footer id="footer">
+	{% if not minimal %}
+	<div class="footer-main">
+		<div class="bound-layout full">
+			<div class="column info-column">
+				<div class="footer-logo">
+					<a href="{{ site.url }}">{% include '_svg/logo-white.svg' %}</a>
+				</div>
+				<div class="vcard">
+					<div class="fn org">Casey Trees</div>
+					<div class="adr">
+						{% if options.street_address %}<span class="street-address">{{ options.street_address }}</span>{% endif %}
+						{% if options.city %}<span class="locality">{{ options.city }}</span>,{% endif %}
+						{% if options.state %}<span class="region">{{ options.state }}</span>{% endif %}
+						{% if options.zip %}<span class="postal-code">{{ options.zip }}</span>{% endif %}
+					</div>
+					<div class="contact-info">
+						{% if options.phone %}<span>phone: <span class="tel">{{ options.phone }}</span></span>{% endif %}
+						{% if options.fax  %}<span class="tel"><span class="type">fax</span>: <span class="value">{{ options.fax }}</span></span>{% endif %}
+						{% if options.email %}<span><a href="mailto:{{ options.email }}" class="email">{{ options.email }}</a></span>{% endif %}
+					</div>
+				</div>
+			</div>
+			<div class="column nav-column">
+				{% if options.nav_headline %}<h3>{{ options.nav_headline }}</h3>{% endif %}
+				<div class="footer-nav">
+					{% include '_global/footer-nav.twig' %}
+				</div>
+			</div>
+			<div class="column interact-column">
+				{#<a{% include '_components/link-attributes.twig' with { link: options.give_link, class: 'btn bigger block' } %}>Donate</a>#}
+				<a href="{{ options.give_link }}" class="btn bigger block">Donate</a>
+				{% include '_components/social-links.twig' with { bigger: true } %}
+			</div>
+		</div>
+	</div>
+	{% endif %}
+	<div class="footer-utility">
+		<div class="bound-layout full">
+			{% if not convio %}
+				{% include '_global/footer-utility-nav.twig' %}
+			{% else %}
+				<address>
+				3030 12th Street NE   |   Washington, DC 20017   |   phone: 202.833.4010   |   fax: 202.833.4092   |  <a href="mailto:friends@caseytrees.org">friends@caseytrees.org</a>
+				</address>
+			{% endif %}
+			<p class="footnote">
+				<span class="copyright">&copy; {{ date|date('Y') }} Casey Trees. All Rights Reserved.</span>
+				<span class="cred"><a href="http://www.newmediacampaigns.com/services/non-profit-web-design" target="_blank">Non-Profit Web Design</a> and Development by New Media Campaigns</span>
+			</p>
+		</div>
+	</div>
+</footer>

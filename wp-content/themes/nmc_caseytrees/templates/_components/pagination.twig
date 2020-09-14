@@ -1,0 +1,27 @@
+{% if pagination.total > 1 %}
+<div class="pagination">
+    {% if pagination.prev %}
+        <a href="{{ pagination.prev.link }}" class="newer {{ pagination.prev.link|length ? '' : 'invisible' }}">{% include '_svg/swipe-arrow-left.svg' %} Newer Posts</a>
+    {% endif %}
+
+
+    {#
+    <ul class="pages">
+        {% for page in pagination.pages %}
+            <li>
+                {% if page.link %}
+                    <a href="{{ page.link }}" class="{{ page.class }}">{{ page.title }}</a>
+                {% else %}
+                    <span class="{{ page.class }}">{{ page.title }}</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+    #}
+
+
+    {% if pagination.next %}
+        <a href="{{ pagination.next.link }}" class="older {{ pagination.next.link|length ? '' : 'invisible' }}">Older Posts {% include '_svg/swipe-arrow-right.svg' %}</a>
+    {% endif %}
+</div>
+{% endif %}

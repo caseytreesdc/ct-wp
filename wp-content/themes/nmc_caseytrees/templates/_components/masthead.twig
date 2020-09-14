@@ -1,0 +1,40 @@
+{% set inheritedMasthead = function('nmc_masthead', post.id)[0] %}
+{% set postMasthead = post.get_field('masthead')[0] %}
+
+{% if function('get_post_type') == 'tribe_events' %}
+	{% set postMasthead = options.events_masthead['masthead'][0] %}
+{% endif %}
+
+{% set image = postMasthead.image ? Image(postMasthead.image).src : Image(inheritedMasthead.image).src %}
+{% set alt = postMasthead.image ? Image(postMasthead.image).alt : Image(inheritedMasthead.image).alt %}
+{% set title = postMasthead.title ? postMasthead.title : inheritedMasthead.title %}
+{% set excerpt = postMasthead.excerpt ? postMasthead.excerpt : inheritedMasthead.excerpt %}
+{% set tall = postMasthead.tall ? postMasthead.tall : inheritedMasthead.tall %}
+{% set center_content = postMasthead.center_content ? postMasthead.center_content : inheritedMasthead.center_content %}
+
+{% set height = 470 %}
+{% if tall %}
+	{% set height = 575 %}
+{% endif %}
+
+{% if function('is_search') %}
+	{% set title = 'Search' %}
+	{% set center_content = true %}
+{% endif %}
+
+<section id="masthead" class="{% if tall %} bigger{% endif %}{% if center_content %} center-content{% endif %}{% if not image %} no-image{% endif %}">
+	{% if image %}
+		{% include '_components/image.twig' with {
+			image: image,
+			aspect: 1440/height,
+			ratio: 1,
+			alt: alt
+		} %}
+	{% endif %}
+	<div class="bound-layout">
+		<div class="masthead-content">
+			{% if title %}<h1>{{ title }}</h1>{% endif %}
+			{% if excerpt %}<p>{{ excerpt }}</p>{% endif %}
+		</div>
+	</div>
+</section>

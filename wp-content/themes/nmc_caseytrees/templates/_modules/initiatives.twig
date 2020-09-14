@@ -1,0 +1,19 @@
+<section class="module initiatives{% include '_modules/module-options.twig' with { module: module } %}">
+	<div class="bound-layout">
+		<div class="what-we-do">
+			{% for thing in module.initiatives %}
+			<div class="thing">
+				<a href="{{ thing.link }}">
+					<div class="icon {{ thing.icon }}">
+						{% include '_svg/icon-' ~ thing.icon ~ '.svg' %}
+					</div>
+					<div class="description">
+						{% if thing.title %}<h4>{{ thing.title }}</h4>{% endif %}
+						{% if thing.description %}<p>{{ thing.description }}</p>{% endif %}
+					</div>
+				</a>
+			</div>
+			{% endfor %}
+		</div>
+	</div>
+</section>

@@ -1,0 +1,12 @@
+{% set subnav = function('nmc_get_subnav', post.id) %}
+{% if subnav %}
+<section>
+    <h3>Subnav goes here if one exists</h3>
+    {{ function('nmc_get_subnav', post.id) }}
+</section>
+{% endif %}
+
+<section>
+    <h3>Sidebar section</h3>
+    <p>This is the sidebar section content</p>
+</section>

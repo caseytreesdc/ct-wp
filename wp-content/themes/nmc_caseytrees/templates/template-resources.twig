@@ -1,0 +1,59 @@
+{% extends "_layouts/layout-one-col.twig" %}
+
+{% block boundClass %} narrow{% endblock boundClass %}
+
+{% block content %}
+
+	<form action="{{ post.link }}" class="resources-filter">
+        <input type="search" name="search" placeholder="Enter Keyword" value="{{ get.search }}">
+        <input type="submit" class="btn green" value="Search">
+        <h5>Select Resource Type:</h5>
+        <div class="category-choose">
+
+            {##### These used to be a requirement. Leaving them here in case they become one again
+            <label for="resource-category-blog">
+                Blog<input type="radio" id="resource-category-blog" name="resource_category" value="blog"{% if get.resource_category == 'blog' %} selected="selected"{% endif %}>
+            </label>
+            <label for="resource-category-trees">
+                Trees<input type="radio" id="resource-category-trees" name="resource_category" value="trees"{% if get.resource_category == 'trees' %} selected="selected"{% endif %}>
+            </label>
+            <label for="resource-category-pages">
+                Pages<input type="radio" id="resource-category-pages" name="resource_category" value="blog"{% if get.resource_category == 'pages' %} selected="selected"{% endif %}>
+            </label>
+            #}
+
+            <label for="resource-category-null" class="selected">
+                All<input type="radio" id="resource-category-null" name="resource_category" value="null"{% if get.resource_category == 'null' %} selected="selected"{% endif %}>
+            </label>
+            {% for option in resource_categories %}
+            <label for="resource-category-{{ option.slug }}">
+                {{ option.title }}<input type="radio" id="resource-category-{{ option.slug }}" name="resource_category" value="{{ option.slug }}"{% if get.resource_category == option.slug %} selected="selected"{% endif %}>
+            </label>
+            {% endfor %}
+
+        </div>
+    </form>
+
+    <div class="post-list">
+        {% for item in posts %}
+            {% include '_specific/partial-resource.twig' with { item: item } %}
+        {% else %}
+        	<h3>No results found.</h3>
+        {% endfor %}
+
+        {% if not post.hide_tweet %}
+        <div class="latest-tweet">
+        	{% set tweet = function('nmc_social', 'https://secure.newmediacampaigns.com/proxy/twitter/proxy.php/1.1/statuses/user_timeline.json?screen_name=caseytrees&amp;count=1') %}
+            <!-- {{ tweet|print_r }} -->
+        	{# <div class="type">Twitter</div>
+        	<div class="tweet">{{ tweet[0].text }}</div>
+        	<div class="tweet-footer">
+        		<a href="http://twitter.com/{{ tweet[0].user.screen_name }}" target="_blank">@{{ tweet[0].user.screen_name }}</a> | {{ tweet[0].created_at|date('c')|time_ago }}
+        	</div> #}
+        </div>
+        {% endif %}
+
+        {% include '_components/pagination.twig' with { pagination: pagination } %}
+    </div>
+
+{% endblock content %}

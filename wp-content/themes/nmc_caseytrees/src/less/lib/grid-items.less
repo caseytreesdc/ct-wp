@@ -1,0 +1,59 @@
+/* Grid Items */
+@grid-item-gutter: 20px;
+
+
+.gi(@cols) {
+    @gutterSum: (@cols - 1) * @grid-item-gutter;
+    width: calc(~"(100% - "@gutterSum~") / "@cols);
+    clear: none;
+    &:nth-child(n) { clear: none; margin-right: @grid-item-gutter; }
+    &:nth-child(@{cols}n) { margin-right: 0; }
+    &:nth-child(@{cols}n+1) { clear: left; }
+}
+
+.grid-items {
+    overflow: hidden;
+    .grid-item {
+        float: left;
+        margin-bottom: @grid-item-gutter;
+    }
+
+    &.grid6 .grid-item { .gi(6); }
+    &.grid5 .grid-item { .gi(5); }
+    &.grid4 .grid-item { .gi(4); }
+    &.grid3 .grid-item { .gi(3); }
+    &.grid2 .grid-item { .gi(2); }
+    &.grid1 .grid-item { .gi(1); }
+}
+//iPad
+
+@media(max-width: 800px) {
+    .grid-items {
+        &.grid6, &.grid5 {
+            .grid-item { .gi(3); }
+        }
+    }
+}
+
+//miniTab
+@media(max-width: 760px) {
+    .grid-items {
+        //&.grid6, &.grid5, &.grid4, &.grid3 {
+        &.grid4, &.grid3 {
+            .grid-item { .gi(2); }
+        }
+    }
+}
+
+//old iPhone
+@media(max-width: 599px) {
+    .grid-items {
+        //&.grid6, &.grid5, &.grid4, &.grid4, &.grid3, &.grid2 {
+        &.grid4, &.grid3, &.grid2 {
+            .grid-item {
+                margin-right: 0;
+                width: 100%;
+            }
+        }
+    }
+}

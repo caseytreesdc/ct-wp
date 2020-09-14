@@ -1,0 +1,89 @@
+{% extends "_layouts/full.twig" %}
+
+{% block layout %}
+<div id="main">
+	<div id="trees-wrap">
+		<div class="show-hide-filter">
+			<span class="show">Filter Options</span>
+			<span class="hide">Hide Filter</span>
+		</div>
+		<form action="{{ post.link }}" id="tree-filter">
+			<h3>Filter Trees</h3>
+			<div class="filters">
+				<div class="filter-section">
+					{#<h4 class="filter-title">Growing Conditions</h4>#}
+					<div class="filter-options">
+						
+						{% include '_specific/filter-checkboxes.twig' with { name: 'light_conditions', label: 'Light Conditions', options: light_conditions.choices } %}
+						
+						{# include '_specific/filter-select.twig' with { name: 'soil_conditions', label: 'Soil Conditions', options: soil_conditions.choices } #}
+						
+						{# include '_specific/filter-checkbox.twig' with { name: 'drought_tolerant', label: 'Drought Tolerant' } #}
+						
+						{# include '_specific/filter-checkbox.twig' with { name: 'air_pollution_tolerant', label: 'Air Pollution Tolerant' } #}
+						
+						{# include '_specific/filter-checkbox.twig' with { name: 'salt_tolerant', label: 'Salt Tolerant' } #}
+
+						{% include '_specific/filter-checkboxes.twig' with { name: 'size', label: 'Size', options: size.choices } %}
+						
+						<h5>Other Options</h5>
+						
+						{% include '_specific/filter-checkbox.twig' with { name: 'prominent_flower', label: 'Flowering' } %}
+						
+						{% include '_specific/filter-checkbox.twig' with { name: 'showy_seasonal_color', label: 'Fall Color' } %}
+						
+						{% include '_specific/filter-checkbox.twig' with { name: 'fruitnut_producing', label: 'Fruit/Nut Producing' } %}
+						
+						{% include '_specific/filter-checkbox.twig' with { name: 'evergreen', label: 'Evergreen' } %}
+
+					</div>
+				</div>
+			</div>
+			<a href="#" class="btn gray block reset-form">Reset Form</a>
+		</form>
+
+		<div id="trees">
+			
+			<div class="trees-intro">
+				{{ post.content }}
+			</div>
+
+			<form class="go-to-tree">
+				<label>View a specific tree</label>
+				<select>
+					<option>Select Tree</option>
+					{% for tree in all_trees %}
+					{% set name = tree.get_field('display_name') ? tree.get_field('display_name') : tree.post_title %}
+					<option value="{{ tree.link }}">{{ name }}</option>
+					{% endfor %}
+				</select>
+			</form>
+
+			<div class="trees-wrap">
+				{% for tree in trees %}
+				<article class="tree-partial fadeInDown d{{ loop.index }}">
+					<a href="{{ tree.link }}">
+						<div class="tree-image">
+							<img src="{{ Image(tree.primary_image).src|resize(293, 172) }}" alt="{{ Image(tree.primary_image).alt }}">
+						</div>
+						<div class="tree-content">
+							{% set name = tree.get_field('display_name') ? tree.get_field('display_name') : tree.post_title %}
+							<h3>{{ name }}</h3>
+							{% if tree.scientific_name %}<p><em>{{ tree.scientific_name }}</em></p>{% endif %}
+							<ul>
+								{% if tree.tree_rebate %}<li class="rebate">{% include '_svg/icon-rebate.svg' %}</li>{% endif %}
+								{% if tree.riversmart_homes %}<li class="riversmarthomes">{% include '_svg/icon-riversmarthomes.svg' %}</li>{% endif %}
+							</ul>
+						</div>
+					</a>
+				</article>
+				{% else %}
+				<h2>No Matches</h2>
+				<p>Please modify your search settings.</p>
+				{% endfor %}
+			</div>
+
+		</div>
+	</div>
+</div>
+{% endblock layout %}

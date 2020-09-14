@@ -1,0 +1,9 @@
+<fieldset>
+	<h5>{{ label }}</h5>
+	{% for key, option in options %}
+	<label for="{{ key }}" class="checkbox-label{% if key in data[name] %} checked{% endif %}">
+		<input type="checkbox" class="submit-on-change" name="{{ name }}[]" id="{{ key }}" value="{{ key }}"{% if key in data[name] %} checked="checked"{% endif %}>
+		<span>{{ option }}</span>
+	</label>
+	{% endfor %}
+</fieldset>

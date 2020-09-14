@@ -1,0 +1,33 @@
+{% extends "_layouts/layout-one-col.twig" %}
+
+{% block pageTitle %}{{ title }}{% endblock pageTitle %}
+
+{% block masthead %}{% endblock masthead %}
+    
+{% block content %}
+<div class="individual-post">
+    <div class="post-image">
+    	<img src="{{ Image(post.image).src }}" alt="{{ Image(post.image).alt }}">
+    </div>
+    <header>
+	    <div class="meta">
+	    	{% if function('get_post_type') == 'post' %}<span>Blog Post</span>{% endif %}
+	    	{% if post.get_field('author') %}<span class="author">By {{ post.get_field('author') }}</span>{% endif %}
+	    	<span class="time">
+		        <time datetime="{{ post.date|date('Y-m-d') }}">{{ post.date|date('F j, Y') }}</time>
+	        </span>
+	    </div>
+	    <h2>{{ post.title }}</h2>
+    </header>
+    {{post.content}}
+    {% include '_specific/post-footer.twig' with { item: post } %}
+	<div class="post-nav">
+
+		{% if post.prev.link %}<a href="{{ post.prev.link }}" rel="prev">{% include '_svg/swipe-arrow-left.svg' %} Previous Post</a>{% endif %}
+	
+		{% if post.next.link %}<a href="{{ post.next.link }}" rel="next">Next Post {% include '_svg/swipe-arrow-right.svg' %}</a>{% endif %}
+	
+	</div>
+</div>
+{% include '_components/comments.twig' %}
+{% endblock %}

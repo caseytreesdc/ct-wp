@@ -1,0 +1,63 @@
+.page-template-template-static {
+	padding: 0;
+
+	h2 {
+		color: @green;
+
+		&.light {
+			color: #fff;
+		}
+	}
+	
+	header {
+		padding: 8px 15px;
+		background: #fff;
+
+		svg {
+			width: 150px;
+		}
+	}
+
+	section {
+		padding: 100px 0 20px;
+		height: 100vh;
+
+		&.amount {
+			height: calc(~'100vh - 69px');
+			background: #aaa;
+		}
+
+		&.billing-info {
+			background: #eee;
+		}
+
+		&.payment {
+			background: #aaa;
+		}
+
+		@media (max-width: @mobile) {
+			padding: 50px 0;
+			height: auto;
+		}
+	}
+
+	.columns {
+		.flex-block;
+		.justify-content(space-between);
+
+		.column {
+			padding: 25px;
+			width: 48%;
+			background: #fff;
+		}
+
+		@media (max-width: @mobile) {
+			display: block;
+
+			.column {
+				margin: 0 0 30px;
+				width: auto;
+			}
+		}
+	}
+}

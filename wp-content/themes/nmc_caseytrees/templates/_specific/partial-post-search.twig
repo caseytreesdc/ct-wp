@@ -1,0 +1,15 @@
+<article class="partial-post {{ item.class }}">
+	<a href="{{ item.link }}">
+	    <header>
+		    <div class="meta">
+		    	{% if function('get_post_type', item.id) == 'post' %}<span>Blog Post</span>{% endif %}
+		    	{% if item.get_field('author') %}<span class="author">By {{ item.get_field('author') }}</span>{% endif %}
+		    	<span class="time">
+			        <time datetime="{{ item.date|date('Y-m-d') }}">{{ item.date|date('F j, Y') }}</time>
+		        </span>
+		    </div>
+		    <h2>{{ item.title }}</h2>
+		    <p>{{ item.content|striptags|truncate(50) }}</p>
+	    </header>
+    </a>
+</article>

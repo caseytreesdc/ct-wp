@@ -1,0 +1,7 @@
+Sitemap: https://caseytrees.org/sitemap
+
+User-agent: *
+Disallow: /wp-admin/
+Allow: /wp-admin/admin-ajax.php
+Disallow: /search/
+Disallow: /?s=

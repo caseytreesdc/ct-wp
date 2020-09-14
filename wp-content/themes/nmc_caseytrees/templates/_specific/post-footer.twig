@@ -1,0 +1,14 @@
+<div class="post-footer">
+	<ul class="categories">
+		{% for cat in item.terms %}
+			{% if cat.taxonomy == 'category' %}
+			<li><a href="{{ cat.link }}">{{ cat.title }}</a></li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+	<div class="share">
+		<a href="https://www.facebook.com/sharer/sharer.php?u={{ item.link }}" class="facebook" target="_blank">{% include '_svg/icon-facebook.svg' %}</a>
+		<a href="https://twitter.com/home?status={{ item.title }} - {{ item.link }}" class="twitter" target="_blank">{% include '_svg/icon-twitter.svg' %}</a>
+		<a href="mailto:?&subject=Article from {{ site.title }}&body={{ item.title }} - {{ item.link }}" class="email" target="_blank">{% include '_svg/icon-envelope.svg' %}</a>
+	</div>
+</div>

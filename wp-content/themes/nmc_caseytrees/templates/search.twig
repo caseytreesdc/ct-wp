@@ -1,0 +1,29 @@
+{% extends "_layouts/layout-one-col.twig" %}
+
+{% block content %}
+	{% set search_query = function('get_search_query') %}
+	<div class="search-feed">
+	
+		<div class="search-form">
+			<form action="{{ site.url }}">
+				<input type="search" name="s" placeholder="Search Term..." value="{{ search_query }}">
+				<input type="submit" class="btn green" value="Search">
+			</form>
+		</div>
+
+		{% if search_query %}
+			<h5>Search results for "{{ search_query }}"</h5>
+			<hr>
+			<div class="feed">
+				{% for post in posts %}
+			        {% include '_specific/partial-post-search.twig' with { item: post } %}
+		        {% else %}
+		        	<h5>No posts found.</h5>
+		        	<p>Please try a different search term or navigate to another page.</p>
+			    {% endfor %}
+			    {% include '_components/pagination.twig' with { pagination: pagination } %}
+		    </div>
+	    {% endif %}
+
+    </div>
+{% endblock content %}

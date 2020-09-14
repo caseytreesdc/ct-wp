@@ -1,0 +1,20 @@
+{% extends "_layouts/full.twig" %}
+
+{% block pageTitle %}{{ title }}{% endblock pageTitle %}
+
+{% block masthead %}{% endblock masthead %}
+
+{% block aboveBody %}{% endblock aboveBody %}
+
+{% block content %}
+<div class="modules">
+	<div class="module no-bottom-spacing">
+		<div class="bound-layout narrow">
+			<h2>{{ post.title }}</h2>
+		</div>
+	</div>
+	{% for module in post.get_field('modules') %}
+		{% include '_modules/' ~ module.acf_fc_layout ~ '.twig' with { module: module } %}
+	{% endfor %}
+</div>
+{% endblock content %}
